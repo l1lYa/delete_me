@@ -1,0 +1,20 @@
+on: 
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: WebPageTest Action
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        
+      - name: WebPageTest
+        uses: WPO-Foundation/webpagetest-github-action@main
+        with:
+          apiKey: ${{ secrets.WPT_API_KEY }}
+          urls: |
+            https://adventures.polaris.com/
+          label: 'GitHub Action Test'
+          budget: 'wpt-budget.json'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
